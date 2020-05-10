@@ -36,11 +36,11 @@ void process_image_callback(const sensor_msgs::Image img)
   }  
   ROS_INFO("left: %d,    Center: %d,    Right:%d", left_side, center_side, right_side);
   if(left_side>center_side && left_side>right_side)
-	drive_robot(0,0.125);
+	drive_robot(0.05,0.2);
   if(center_side>left_side && center_side>right_side)
 	drive_robot(0.2,0);
   if(right_side>left_side && right_side>center_side)
-	drive_robot(0,-0.125);
+	drive_robot(0.05,-0.2);
   if(left_side==0 && center_side==0 && right_side==0)
 	drive_robot(0,0);
 }
