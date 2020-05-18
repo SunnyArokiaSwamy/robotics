@@ -14,11 +14,33 @@
 	<param name="global_frame_id" value="map"/>
 
 	<!-- Initial Pose -->
-	<param name="initial_pose_x" value="-1.95"/>
-	<param name="initial_pose_y" value="-5.25"/>
+	<param name="initial_pose_x" value="0"/>
+	<param name="initial_pose_y" value="0"/>
 	<param name="initial_pose_a" value="-1.5707"/>
+
+	<!-- Additional Parameters-->
+	<param name="min_particles" value="100"/>
+	<param name = "max_particles" value="1000"/>
+	<param name="update_min_a" value="0.2"/>
+	<param name="update_min_d" value="0.05"/>
+	<param name="laser_min_range" value="-1.0"/>
+	<param name="laser_max_range" value="-1.0"/>
+	<param name="laser_max_beams" value="50"/>
+	<param name="laser_z_hit" value="0.95"/>
+	<param name="laser_z_rand" value="0.05"/>
+	
 </node>
 
+<!-- Move Base -->
+<node name="move_base" pkg="move_base" type="move_base" respawn="false" output="screen">
+	<param name="base_global_planner" value="navfn/NavfnROS" />
+	<param name="base_local_planner" value="base_local_planner/TrajectoryPlannerROS"/>
+	<rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+	<rosparam file="$(find my_robot)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	<rosparam file="$(find my_robot)/config/local_costmap_params.yaml" command="load" />
+	<rosparam file="$(find my_robot)/config/global_costmap_params.yaml" command="load" />
+	<rosparam file="$(find my_robot)/config/base_local_planner_params.yaml" command="load" />
+</node>
 
 
 
